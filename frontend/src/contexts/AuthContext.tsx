@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_API_URL ?? '/api';
+
 interface AuthUser {
   _id: string;
   name: string;
@@ -41,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function login(email: string, password: string): Promise<void> {
-    const { data } = await axios.post<{ token: string; user: AuthUser }>('/api/auth/login', {
+    const { data } = await axios.post<{ token: string; user: AuthUser }>(`${BASE_URL}/auth/login`, {
       email,
       password,
     });
@@ -49,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function register(name: string, email: string, password: string): Promise<void> {
-    const { data } = await axios.post<{ token: string; user: AuthUser }>('/api/auth/register', {
+    const { data } = await axios.post<{ token: string; user: AuthUser }>(`${BASE_URL}/auth/register`, {
       name,
       email,
       password,
