@@ -1,0 +1,614 @@
+================================================================================
+UNIVERSIDADE DE SOROCABA
+PRÓ-REITORIA DE GRADUAÇÃO E ASSUNTOS ESTUDANTIS
+CIÊNCIA DE DADOS
+
+Luis Felipe Ferreira Lopes
+Jonathas Buzzetti Villalba
+
+URBAN DATA HUB
+
+Sorocaba/SP
+2026
+================================================================================
+
+
+================================================================================
+RESUMO
+================================================================================
+
+        O projeto Urban Data Hub desenvolveu uma plataforma web voltada ao
+registro, armazenamento, consulta e acompanhamento de ocorrências urbanas
+reportadas pela população. A proposta partiu da necessidade de centralizar, em
+um único ambiente digital, informações sobre problemas de infraestrutura urbana
+como buracos em vias, iluminação pública defeituosa, descarte irregular de
+resíduos e alagamentos. O sistema foi implementado com banco de dados não
+relacional para lidar com dados semiestruturados, incluindo descrições textuais,
+categorias, localização, imagens, comentários e histórico de status das
+ocorrências. A metodologia adotou abordagem aplicada, exploratória e descritiva,
+com desenvolvimento iterativo de protótipo funcional utilizando React 18,
+TypeScript, Node.js, Express e MongoDB. Como resultado, foi entregue uma
+plataforma completa com autenticação de usuários via JWT, controle de acesso por
+perfil, sistema de comentários com identificação de moderadores, mecanismo de
+votação para confirmação de ocorrências, exportação de dados em formato CSV,
+painel de estatísticas com visualizações gráficas e busca textual avançada. O
+sistema demonstra como soluções baseadas em dados podem colaborar para cidades
+mais organizadas, responsivas e sustentáveis.
+
+Palavras-chave: monitoramento urbano; MongoDB; banco de dados não relacional;
+ocorrências urbanas; cidades sustentáveis.
+
+
+================================================================================
+ABSTRACT
+================================================================================
+
+        The Urban Data Hub project developed a web platform aimed at recording,
+storing, querying and tracking urban incidents reported by citizens. The proposal
+arose from the need to centralize, in a single digital environment, information
+about urban infrastructure issues such as potholes, faulty public lighting,
+improper waste disposal and flooding. The system was implemented with a
+non-relational database to handle semi-structured data, including textual
+descriptions, categories, location, images, comments and incident status history.
+The methodology adopted an applied, exploratory and descriptive approach, with
+iterative development of a functional prototype using React 18, TypeScript,
+Node.js, Express and MongoDB. As a result, a complete platform was delivered with
+user authentication via JWT, profile-based access control, a commenting system
+with moderator identification, an incident confirmation voting mechanism, CSV
+data export, a statistics dashboard with graphical visualizations and advanced
+text search. The system demonstrates how data-based solutions can contribute to
+more organized, responsive and sustainable cities.
+
+Keywords: urban monitoring; MongoDB; non-relational database; urban incidents;
+sustainable cities.
+
+
+================================================================================
+LISTA DE SIGLAS E ABREVIATURAS
+================================================================================
+
+Sigla         Significado
+-----------   -----------------------------------------------------------------
+ABNT          Associação Brasileira de Normas Técnicas
+API           Application Programming Interface
+CORS          Cross-Origin Resource Sharing
+CRUD          Create, Read, Update and Delete
+CSV           Comma-Separated Values
+JWT           JSON Web Token
+NoSQL         Not Only SQL
+ODM           Object Document Mapper
+ODS           Objetivos de Desenvolvimento Sustentável
+REST          Representational State Transfer
+SPA           Single Page Application
+TAP           Termo de Abertura do Projeto
+UDH           Urban Data Hub
+
+
+================================================================================
+SUMÁRIO
+================================================================================
+
+1 INTRODUÇÃO
+2 DESENVOLVIMENTO
+2.1 Justificativa
+2.2 Revisão bibliográfica
+2.3 Objetivos
+2.3.1 Objetivo geral
+2.3.2 Objetivos específicos
+2.4 Materiais e métodos
+2.5 Resultados obtidos
+3 CONSIDERAÇÕES FINAIS
+REFERÊNCIAS
+ANEXO A - Síntese do TAP do projeto
+
+
+================================================================================
+1 INTRODUÇÃO
+================================================================================
+
+        O crescimento das cidades e a complexidade dos serviços públicos tornam
+cada vez mais importante o uso de tecnologias capazes de apoiar a identificação,
+o registro e o acompanhamento de problemas urbanos. Em muitos contextos,
+demandas relacionadas à infraestrutura, limpeza, iluminação, mobilidade e
+manutenção são registradas de forma dispersa, dificultando a visualização do
+cenário geral e a priorização de ações por parte dos gestores públicos. Nesse
+contexto, o projeto Urban Data Hub foi concebido como uma proposta de sistema
+voltada à centralização de ocorrências urbanas reportadas pela população,
+reunindo informações em uma plataforma digital única e acessível.
+
+        O projeto parte do entendimento de que dados urbanos podem contribuir
+significativamente para a melhoria da gestão pública quando são organizados de
+forma acessível e estruturada. Entretanto, como tais ocorrências podem incluir
+descrições textuais, categorias variadas, imagens, coordenadas ou referências de
+localização, comentários da comunidade e alterações de status ao longo do tempo,
+a estrutura tradicional rígida de dados nem sempre atende de modo eficiente à
+natureza heterogênea dessas informações. Por esse motivo, o projeto adotou o
+MongoDB como tecnologia de persistência, explorando a flexibilidade do modelo
+orientado a documentos.
+
+        Além da centralização dos registros, o sistema incorporou mecanismos de
+engajamento comunitário, permitindo que cidadãos confirmem ocorrências por meio
+de votos, adicionem comentários e acompanhem o histórico completo de cada
+demanda. Esses recursos ampliam o valor da plataforma, transformando-a em um
+canal de comunicação entre a população e os gestores, em consonância com os
+princípios de transparência e participação cidadã preconizados pelos Objetivos
+de Desenvolvimento Sustentável.
+
+        Este relatório apresenta a fundamentação, os objetivos, a metodologia e
+os resultados obtidos no desenvolvimento do Urban Data Hub. O sistema foi
+concluído em sua versão funcional de protótipo acadêmico, conforme escopo
+definido no Termo de Abertura do Projeto, com entregas adicionais que ampliaram
+o escopo original. O trabalho está organizado em uma seção de desenvolvimento,
+que contempla justificativa, revisão bibliográfica, objetivos, materiais e
+métodos e resultados obtidos, seguida das considerações finais, referências e
+anexo com a síntese do TAP.
+
+
+================================================================================
+2 DESENVOLVIMENTO
+================================================================================
+
+------------------------------------------------------------------------
+2.1 Justificativa
+------------------------------------------------------------------------
+
+        A proposta do Urban Data Hub justifica-se pela necessidade de reunir,
+em um único ambiente, registros de problemas urbanos que normalmente aparecem de
+forma descentralizada e pouco padronizada. Quando informações sobre falhas na
+infraestrutura urbana ficam dispersas entre canais de atendimento distintos,
+redes sociais e registros informais, a análise torna-se limitada e o
+acompanhamento das demandas perde eficiência. Ao centralizar esses dados, o
+sistema favorece uma visão mais clara sobre o volume, a recorrência e a
+distribuição geográfica das ocorrências, subsidiando decisões mais fundamentadas.
+
+        Do ponto de vista técnico, a escolha por um banco de dados não relacional
+decorre da variedade dos dados envolvidos. Uma ocorrência urbana pode conter
+texto livre, categoria, bairro, imagem, data, responsável, registro de votos de
+confirmação, comentários de múltiplos usuários e mudanças sucessivas de status,
+o que exige flexibilidade na modelagem de dados. Estruturas relacionais
+tradicionais demandariam múltiplas tabelas com junções complexas para representar
+esse conjunto de informações, ao passo que o modelo orientado a documentos do
+MongoDB permite armazenar cada ocorrência como uma unidade coesa e evolutiva.
+Assim, o projeto torna-se adequado também como estudo aplicado de tecnologias
+contemporâneas de armazenamento e desenvolvimento de sistemas web.
+
+        Além do aspecto tecnológico, o projeto possui relevância social e
+acadêmica. Socialmente, contribui para a discussão sobre cidades mais
+responsivas, participativas e sustentáveis, oferecendo um canal estruturado para
+que a população registre demandas e acompanhe sua resolução. Academicamente,
+possibilita a integração entre conceitos de banco de dados não relacional,
+desenvolvimento de sistemas web full-stack, autenticação e segurança, modelagem
+de informação, visualização de dados e análise estatística no contexto de um
+problema realista e socialmente relevante.
+
+
+------------------------------------------------------------------------
+2.2 Revisão bibliográfica
+------------------------------------------------------------------------
+
+        A transformação digital no contexto urbano tem impulsionado o uso de
+plataformas capazes de captar, integrar e analisar dados provenientes de
+diferentes fontes. No debate sobre cidades inteligentes, a informação passa a
+ser entendida como recurso estratégico para melhorar serviços, otimizar processos
+e ampliar a capacidade de resposta diante de problemas cotidianos (ONU, 2015).
+Nesse cenário, ferramentas de monitoramento urbano assumem papel importante por
+permitir maior organização dos registros e melhor entendimento das demandas
+locais, aproximando gestores e cidadãos por meio de canais digitais acessíveis.
+
+        No campo dos bancos de dados, soluções não relacionais ganharam destaque
+por oferecerem maior flexibilidade para o armazenamento de dados
+semiestruturados. Em aplicações nas quais os registros apresentam formatos
+variáveis, o modelo orientado a documentos torna-se vantajoso por reduzir a
+rigidez de esquemas tradicionais e facilitar a evolução do sistema ao longo do
+desenvolvimento. O MongoDB insere-se nesse contexto ao permitir o armazenamento
+de documentos com estruturas adaptáveis às necessidades da aplicação, sendo
+amplamente utilizado em sistemas web modernos por sua integração natural com
+ecossistemas baseados em JavaScript e TypeScript (MONGODB, 2026). O uso do
+Mongoose como ODM (Object Document Mapper) adiciona uma camada de abstração que
+permite definir esquemas flexíveis com validação embutida, aproximando a
+experiência de desenvolvimento do modelo relacional sem abrir mão da
+flexibilidade documental.
+
+        No que se refere à segurança de sistemas web, o uso de JSON Web Tokens
+(JWT) consolidou-se como padrão para autenticação stateless em APIs RESTful
+(AUTH0, 2026). Essa abordagem permite que o servidor valide a identidade do
+usuário sem necessidade de armazenar sessões, tornando a arquitetura mais
+escalável e adequada a ambientes distribuídos. A combinação de JWT com algoritmos
+de hash de senhas, como o bcrypt, garante que credenciais sejam protegidas mesmo
+em caso de comprometimento do banco de dados, uma vez que senhas armazenadas como
+hashes irreversíveis não podem ser recuperadas diretamente.
+
+        O desenvolvimento de aplicações web modernas tem sido fortemente
+influenciado pelo paradigma das Single Page Applications (SPA), no qual toda a
+lógica de renderização ocorre no cliente após o carregamento inicial do
+JavaScript. O React, biblioteca criada pelo Facebook e mantida pela comunidade,
+estabeleceu-se como referência nesse modelo ao introduzir o conceito de
+componentes reutilizáveis com gerenciamento de estado declarativo (REACT, 2026).
+A adoção do TypeScript como superset do JavaScript adiciona tipagem estática ao
+desenvolvimento, reduzindo erros em tempo de execução e melhorando a
+manutenibilidade do código em projetos de maior escala.
+
+        Também merece destaque a relação entre tecnologia, governança e
+sustentabilidade. Projetos que organizam dados urbanos podem contribuir para
+práticas alinhadas aos Objetivos de Desenvolvimento Sustentável, especialmente
+quando apoiam a identificação de problemas de infraestrutura, ampliam a
+transparência das informações e favorecem ações mais rápidas e fundamentadas.
+Dessa forma, o Urban Data Hub dialoga com as metas da ODS 9 (indústria, inovação
+e infraestrutura), ODS 11 (cidades e comunidades sustentáveis) e ODS 16
+(paz, justiça e instituições eficazes), reforçando a dimensão social do projeto
+para além de sua contribuição técnica.
+
+
+------------------------------------------------------------------------
+2.3 Objetivos
+------------------------------------------------------------------------
+
+2.3.1 Objetivo geral
+
+        Desenvolver uma plataforma web para registrar, armazenar, consultar e
+visualizar ocorrências urbanas reportadas pela população, utilizando MongoDB como
+banco de dados não relacional, com suporte a engajamento comunitário e exportação
+de dados para análise.
+
+2.3.2 Objetivos específicos
+
+• Modelar uma estrutura de dados capaz de armazenar descrição, categoria,
+  localização, imagem, comentários, votos de confirmação e histórico completo de
+  alterações de status de cada ocorrência.
+
+• Implementar funcionalidades de cadastro, listagem, consulta, atualização e
+  exclusão de ocorrências urbanas com controle de autoria e perfis de acesso.
+
+• Permitir a filtragem e busca dos registros por tipo de problema, bairro,
+  situação da ocorrência, intervalo de datas e termo textual livre.
+
+• Construir um painel de acompanhamento para facilitar a visualização dos dados
+  cadastrados por meio de gráficos interativos e indicadores estatísticos.
+
+• Implementar sistema de autenticação e autorização com perfis de usuário comum
+  e administrador, utilizando JWT com hash de senhas via bcrypt.
+
+• Incorporar mecanismos de participação comunitária por meio de sistema de votos
+  para confirmação de ocorrências e sistema de comentários com identificação
+  de moderadores.
+
+• Disponibilizar exportação dos dados filtrados em formato CSV para uso em
+  ferramentas externas de análise.
+
+• Demonstrar a viabilidade do uso de banco de dados não relacional em uma
+  aplicação de monitoramento urbano com dados semiestruturados e heterogêneos.
+
+
+------------------------------------------------------------------------
+2.4 Materiais e métodos
+------------------------------------------------------------------------
+
+        A pesquisa possui natureza aplicada, pois desenvolveu uma solução prática
+para o registro e acompanhamento de problemas urbanos. Quanto aos objetivos,
+caracteriza-se como exploratória e descritiva, uma vez que investigou a aplicação
+de tecnologias de banco de dados não relacional em um contexto urbano e descreveu
+a estrutura necessária para o funcionamento do sistema. A abordagem metodológica
+combinou levantamento bibliográfico com modelagem, desenvolvimento iterativo e
+testes funcionais de protótipo.
+
+        Na etapa teórica, foram consultadas obras e documentações relacionadas a
+bancos de dados não relacionais, cidades inteligentes, gestão urbana,
+autenticação em sistemas web, visualização de dados e desenvolvimento de sistemas
+com TypeScript. Na etapa prática, realizou-se a modelagem das coleções do MongoDB
+e a definição dos atributos essenciais de cada ocorrência, contemplando campos
+como título, descrição, categoria, bairro, endereço, localização geográfica,
+imagem, status, histórico de mudanças de status, comentários e lista de votos.
+
+        O desenvolvimento do protótipo seguiu o escopo definido no TAP do projeto
+e foi organizado em monorepo com separação clara entre backend e frontend. A
+pilha tecnológica adotada está descrita no Quadro 1.
+
+
+QUADRO 1 - Pilha tecnológica do Urban Data Hub
++------------------+--------------------------------------------------+
+| Camada           | Tecnologia                                       |
++------------------+--------------------------------------------------+
+| Frontend         | React 18.3, TypeScript 5.4, Vite 5.2            |
+| Estilização      | Tailwind CSS v3.4                                |
+| Roteamento       | React Router DOM v6.23                           |
+| Gráficos         | Recharts 2.12                                    |
+| Ícones           | Lucide React 0.383                               |
+| Cliente HTTP     | Axios 1.7                                        |
+| Backend          | Node.js, Express 4.18, TypeScript 5.4            |
+| Banco de dados   | MongoDB (via Mongoose 8.3 ODM)                   |
+| Autenticação     | JWT 9.0 (jsonwebtoken) e bcryptjs 3.0            |
+| Validação        | Zod 3.23 (schemas compartilhados)                |
+| Upload           | Multer 1.4 (armazenamento local em disco)        |
+| Dev tooling      | tsx 4.7, dotenv                                  |
++------------------+--------------------------------------------------+
+Fonte: elaborado pelos autores (2026).
+
+
+        A modelagem do banco de dados definiu duas coleções principais:
+occurrences e users. A coleção occurrences armazena os dados de cada ocorrência
+com suporte a campo de imagem, referência ao usuário criador e três arrays
+embutidos: um para o histórico de status (cada entrada registra o status, a data
+e uma observação opcional), um para comentários (cada entrada registra o texto,
+identificador do autor, nome do autor, indicador de perfil administrativo e data
+de criação) e um para votos (lista de identificadores dos usuários que
+confirmaram a ocorrência). A coleção users armazena nome, e-mail, senha com hash
+bcrypt e um campo booleano isAdmin para controle de perfil de acesso. Foram
+criados índices de texto nos campos título e descrição da coleção occurrences,
+possibilitando buscas textuais eficientes por meio do operador $text do MongoDB.
+
+        A API REST foi estruturada com endpoints para operações sobre ocorrências
+e para autenticação de usuários, conforme descrito no Quadro 2.
+
+
+QUADRO 2 - Endpoints da API REST do Urban Data Hub
++--------+------------------------------------------+-------------------------------+
+| Método | Rota                                     | Descrição                     |
++--------+------------------------------------------+-------------------------------+
+| POST   | /api/auth/register                       | Cadastrar novo usuário        |
+| POST   | /api/auth/login                          | Autenticar usuário            |
+| GET    | /api/occurrences                         | Listar ocorrências c/ filtros |
+| GET    | /api/occurrences/stats                   | Estatísticas do dashboard     |
+| GET    | /api/occurrences/my                      | Ocorrências do usuário logado |
+| GET    | /api/occurrences/export                  | Exportar ocorrências em CSV   |
+| GET    | /api/occurrences/:id                     | Detalhes de uma ocorrência    |
+| POST   | /api/occurrences                         | Criar nova ocorrência         |
+| PATCH  | /api/occurrences/:id/status              | Atualizar status              |
+| DELETE | /api/occurrences/:id                     | Excluir ocorrência            |
+| POST   | /api/occurrences/:id/comments            | Adicionar comentário          |
+| DELETE | /api/occurrences/:id/comments/:commentId | Excluir comentário            |
+| POST   | /api/occurrences/:id/vote                | Votar/confirmar ocorrência    |
+| GET    | /health                                  | Verificação de saúde da API   |
++--------+------------------------------------------+-------------------------------+
+Fonte: elaborado pelos autores (2026).
+
+
+        O endpoint de listagem recebe parâmetros de consulta opcionais para
+filtragem por categoria, bairro, status e intervalo de datas, além de suporte a
+busca textual via operador $text e ordenação por data de criação crescente ou
+decrescente, ou por número de votos. O endpoint de exportação retorna os dados
+filtrados no formato CSV com codificação UTF-8 BOM para compatibilidade com
+ferramentas como Microsoft Excel. O endpoint de estatísticas utiliza pipelines de
+agregação do MongoDB para calcular totais por status, por categoria e os cinco
+bairros com maior número de ocorrências.
+
+        O controle de acesso foi implementado por meio de dois middlewares: o
+primeiro (requireAuth) valida o token JWT no cabeçalho Authorization e anexa o
+identificador e o perfil do usuário à requisição; o segundo (requireAdmin) estende
+o primeiro exigindo que o usuário possua perfil administrativo. Rotas de criação
+e exclusão exigem autenticação, enquanto as rotas de leitura são públicas.
+
+        O desenvolvimento do frontend utilizou o contexto React para
+gerenciamento do estado de autenticação em toda a aplicação, com persistência do
+token no localStorage e recuperação automática ao recarregar a página. O
+interceptor do Axios injeta automaticamente o cabeçalho Authorization em todas
+as requisições quando o token está disponível. A validação dos formulários é
+realizada no cliente com esquemas Zod antes do envio ao servidor, evitando
+requisições desnecessárias com dados inválidos.
+
+        A validação do protótipo ocorreu por meio de testes funcionais manuais
+voltados à verificação dos fluxos de cadastro, autenticação, registro de
+ocorrências, filtragem, votação, comentários, atualização de status, exportação e
+exclusão das informações registradas, além da verificação de tipagem estática com
+TypeScript sem erros de compilação em ambos os projetos.
+
+
+------------------------------------------------------------------------
+2.5 Resultados obtidos
+------------------------------------------------------------------------
+
+        Ao final do projeto, foi entregue um protótipo funcional completo que
+demonstra a centralização de ocorrências urbanas em uma única plataforma web. A
+solução permite o armazenamento flexível dos dados no MongoDB, bem como a
+recuperação, visualização e exportação dos registros de forma organizada e
+interativa.
+
+        O sistema implementado disponibiliza as seguintes funcionalidades:
+
+• Cadastro de conta e autenticação: os usuários podem se registrar informando
+  nome, e-mail e senha. A senha é armazenada com hash bcrypt (10 rounds) e a
+  sessão é gerenciada por token JWT com validade de sete dias. Um perfil de
+  administrador foi definido com permissões ampliadas, incluindo a possibilidade
+  de excluir qualquer ocorrência do sistema e ter comentários exibidos com
+  identificação visual de moderador.
+
+• Registro de ocorrências: usuários autenticados podem cadastrar ocorrências
+  informando título, descrição, categoria (sete opções disponíveis), bairro,
+  endereço e imagem opcional. O formulário realiza validação dos campos com Zod
+  antes do envio e exibe pré-visualização da imagem selecionada. Imagens são
+  aceitas nos formatos JPEG, PNG e WebP com limite de 5 MB e armazenadas em disco
+  com nomeação baseada em timestamp.
+
+• Listagem e filtragem avançada: a página principal exibe todas as ocorrências em
+  grade responsiva com suporte a filtros combinados por categoria, bairro, status
+  e intervalo de datas (últimos 7, 30 ou 365 dias). Um campo de busca textual
+  realiza consultas por correspondência nos campos título e descrição via índice
+  de texto do MongoDB. A ordenação pode ser configurada por: mais recentes, mais
+  antigos ou mais votados. Esqueletos de carregamento são exibidos durante as
+  requisições para melhor experiência do usuário.
+
+• Detalhes e histórico de status: a página de detalhes exibe todas as informações
+  de uma ocorrência, incluindo imagem, descrição completa e histórico cronológico
+  de todas as alterações de status em formato de linha do tempo. Qualquer usuário
+  pode registrar uma atualização de status com observação opcional.
+
+• Sistema de votos e confirmações: usuários autenticados podem votar em
+  ocorrências para confirmar que o problema existe em determinado local. O
+  mecanismo é do tipo toggle — o mesmo usuário pode desfazer seu voto — e a
+  contagem de confirmações é exibida em cada card da listagem. A ordenação por
+  número de votos permite identificar as ocorrências com maior engajamento
+  comunitário.
+
+• Sistema de comentários: usuários autenticados podem adicionar comentários em
+  qualquer ocorrência, com limite de 1.000 caracteres por entrada. Comentários
+  realizados por administradores são exibidos com um indicador visual de
+  identificação. O autor do comentário ou um administrador pode excluí-lo a
+  qualquer momento.
+
+• Exclusão controlada: o criador de uma ocorrência pode excluí-la a partir da
+  página de detalhes ou da página de conta. O administrador possui permissão para
+  excluir qualquer ocorrência do sistema, independentemente da autoria.
+
+• Painel de acompanhamento: o dashboard exibe totais por status por meio de cards
+  de indicadores, gráfico de barras com número de ocorrências por categoria
+  (utilizando a biblioteca Recharts), gráfico de pizza com distribuição percentual
+  por status e tabela com os cinco bairros com maior número de registros. O painel
+  oferece botão de exportação dos dados filtrados em formato CSV e botão de
+  impressão para geração de PDF pelo navegador.
+
+• Exportação CSV: o endpoint de exportação retorna todas as ocorrências que
+  correspondem aos filtros ativos em formato CSV com codificação UTF-8 BOM,
+  garantindo compatibilidade com Microsoft Excel sem necessidade de importação
+  manual. Os campos exportados incluem identificador, título, categoria, bairro,
+  status, data de criação e número de votos.
+
+• Página de conta do usuário: exibe o perfil do usuário logado e lista
+  exclusivamente suas próprias ocorrências com opção de exclusão direta em cada
+  card. Administradores visualizam todas as ocorrências do sistema nesta tela,
+  com permissão de exclusão em qualquer registro.
+
+• Interface responsiva em modo escuro: toda a interface foi construída com paleta
+  escura fixa, utilizando tons de cinza profundo com acentuação em azul,
+  garantindo consistência visual em todas as páginas. O layout adapta-se a
+  diferentes tamanhos de tela (celular, tablet e desktop) por meio das classes
+  utilitárias do Tailwind CSS.
+
+        Dados de demonstração foram inseridos por meio de script de seed com oito
+ocorrências de exemplo distribuídas entre diferentes categorias, bairros e status,
+permitindo a avaliação imediata das funcionalidades de filtragem e visualização.
+Um script adicional de criação de administrador foi desenvolvido para facilitar
+a configuração do ambiente de demonstração.
+
+        Entre os principais resultados técnicos alcançados destacam-se: a
+comprovação da aplicabilidade do MongoDB em cenários com dados semiestruturados
+e heterogêneos; a implementação de autenticação stateless com JWT e hash de
+senhas com bcrypt; a tipagem estrita com TypeScript sem erros de compilação em
+ambos os projetos backend e frontend; a construção de uma API REST com separação
+clara entre camadas de rota, controlador e modelo de dados; a utilização de
+pipelines de agregação MongoDB para consultas estatísticas; e a implementação
+de índices de texto para busca eficiente em campos descritivos.
+
+
+================================================================================
+3 CONSIDERAÇÕES FINAIS
+================================================================================
+
+        O Urban Data Hub foi desenvolvido e entregue como protótipo funcional,
+atendendo ao conjunto de objetivos estabelecidos no Termo de Abertura do Projeto
+e incorporando entregas adicionais que ampliaram o escopo original. O sistema
+demonstra de forma concreta como dados urbanos podem ser organizados, consultados,
+visualizados e exportados em uma plataforma digital estruturada, contribuindo para
+a compreensão de como soluções baseadas em dados podem apoiar a gestão e o
+acompanhamento de demandas da cidade.
+
+        A adoção do MongoDB como banco de dados não relacional mostrou-se
+tecnicamente adequada à natureza semiestruturada das ocorrências urbanas,
+permitindo armazenar campos opcionais, arrays embutidos de histórico, comentários
+e votos, além de referências entre documentos, sem a rigidez de esquemas
+relacionais. A utilização de índices de texto nativo do MongoDB para busca textual
+e de pipelines de agregação para o cálculo de estatísticas demonstrou a
+versatilidade da tecnologia em diferentes tipos de consulta.
+
+        A implementação de autenticação com JWT e controle de perfis ampliou o
+escopo do projeto, aproximando-o de um sistema real com níveis de acesso
+diferenciados. Os mecanismos de engajamento comunitário — sistema de votos e
+comentários com identificação de moderadores — acrescentaram uma dimensão
+participativa à plataforma, alinhada com os princípios de transparência e
+governança colaborativa preconizados pelos ODS.
+
+        A escolha da pilha tecnológica baseada em TypeScript, tanto no frontend
+quanto no backend, contribuiu para a qualidade e a manutenibilidade do código,
+com tipagem estrita que reduziu erros em tempo de desenvolvimento. A separação em
+monorepo com responsabilidades bem definidas entre as camadas favorece a evolução
+futura do sistema. A biblioteca Recharts demonstrou ser uma solução eficiente para
+a construção de visualizações interativas no contexto de uma SPA React, enquanto
+o Tailwind CSS viabilizou um desenvolvimento ágil de interface responsiva e
+visualmente consistente.
+
+        Conclui-se, portanto, que o desenvolvimento do Urban Data Hub possui valor
+acadêmico, tecnológico e social. Academicamente, integra conceitos de banco de
+dados, desenvolvimento web, autenticação, modelagem de informação e análise de
+dados. Tecnologicamente, demonstra a aplicação prática de uma pilha moderna e
+amplamente utilizada pelo mercado. Socialmente, apresenta uma proposta concreta
+de canal digital para participação cidadã e monitoramento urbano. O projeto
+estabelece, ainda, uma base consistente para estudos futuros, ampliação funcional
+e eventual adaptação a cenários institucionais mais amplos, como integração com
+sistemas de gestão municipal, expansão para aplicativo móvel ou incorporação de
+geolocalização interativa por meio de mapas.
+
+
+================================================================================
+REFERÊNCIAS
+================================================================================
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 6028: resumo, resenha e
+recensão. Rio de Janeiro: ABNT, 2021.
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 14724: trabalhos acadêmicos —
+apresentação. Rio de Janeiro: ABNT, 2011.
+
+AUTH0. Introduction to JSON Web Tokens. Disponível em: https://jwt.io/introduction.
+Acesso em: 9 abr. 2026.
+
+LOPES, Luis Felipe Ferreira; VILLALBA, Jonathas Buzzetti. Termo de abertura do
+projeto: Urban Data Hub. Sorocaba: Universidade de Sorocaba, 2026.
+
+MONGODB. MongoDB Documentation. Disponível em: https://www.mongodb.com/docs/.
+Acesso em: 9 abr. 2026.
+
+ORGANIZAÇÃO DAS NAÇÕES UNIDAS. Objetivos de Desenvolvimento Sustentável.
+Disponível em: https://brasil.un.org/pt-br/sdgs. Acesso em: 9 abr. 2026.
+
+REACT. React Documentation. Disponível em: https://react.dev.
+Acesso em: 9 abr. 2026.
+
+RECHARTS. Recharts Documentation. Disponível em: https://recharts.org.
+Acesso em: 9 abr. 2026.
+
+TAILWIND CSS. Tailwind CSS Documentation. Disponível em: https://tailwindcss.com/docs.
+Acesso em: 9 abr. 2026.
+
+
+================================================================================
+ANEXO A - SÍNTESE DO TAP DO PROJETO
+================================================================================
+
+        O Termo de Abertura do Projeto define o Urban Data Hub como uma
+plataforma destinada ao registro, armazenamento e visualização de ocorrências
+urbanas reportadas pela população. O documento estabelece como objetivo principal
+o desenvolvimento de um sistema com suporte a descrição, categoria, localização,
+imagem e status das ocorrências, utilizando MongoDB como tecnologia de
+persistência.
+
+        No escopo do projeto, estão previstos cadastro de ocorrências, listagem e
+consulta dos registros, atualização de status, filtros por tipo, bairro e
+situação, além de painel de acompanhamento. Como não escopo, o TAP delimita a
+ausência de integração direta com sistemas da prefeitura, de despacho automático
+de equipes de manutenção e de aplicativo mobile nativo em sua primeira versão.
+Todos os itens do escopo previsto foram implementados e entregues no protótipo
+funcional.
+
+        Adicionalmente, foram incorporados ao sistema recursos que ampliaram o
+valor acadêmico e técnico da entrega: módulo de autenticação com JWT e controle
+de perfis com papel de administrador; sistema de comentários com identificação
+visual de moderadores; mecanismo de votação para confirmação de ocorrências por
+múltiplos usuários; exportação de dados em formato CSV com compatibilidade com
+Microsoft Excel; busca textual avançada com índice de texto MongoDB; filtragem
+por intervalo de datas; ordenação por data e por número de votos; e interface
+responsiva em modo escuro construída com Tailwind CSS.
+
+        O cronograma descrito no TAP distribuiu o trabalho entre definição do
+tema e levantamento de requisitos, modelagem do banco de dados, desenvolvimento
+do backend, desenvolvimento do frontend, testes, documentação, apresentação e
+entrega final. O documento também relaciona o projeto às ODS 9, 11 e 16,
+reforçando a contribuição da proposta para inovação, infraestrutura,
+sustentabilidade urbana e transparência.
+
+        A equipe básica é composta por Luis Felipe Ferreira Lopes, como líder do
+projeto e desenvolvedor, e Jonathas Buzzetti Villalba, como desenvolvedor
+full-stack. As premissas indicam o uso de interface web para registro das
+ocorrências, banco não relacional para dados semiestruturados e foco acadêmico e
+demonstrativo para a primeira versão do sistema.
+
+================================================================================
+FIM DO DOCUMENTO
+================================================================================
